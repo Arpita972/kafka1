@@ -1,0 +1,44 @@
+//check and install java
+java --version
+javac --version
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt install default-jdk 
+javac --version
+java --version
+
+
+cd /home/ai
+
+//backup .bashrc file 
+cp ~/.bashrc ~/.bashrc_backup
+
+//edit .bashrc file to update path
+nano .bashrc
+
+//add path to .bashrc. If any existing path exists add : after path and add your new path ended by :$PATH
+export PATH="$VOLTA_HOME/bin:/home/ai/kafka/bin:$PATH"
+ctrl+O and ctrl+X
+
+cd kafka
+
+//create a folder data inside kafka folder. 
+//create server and zookeeper folder within data folder
+
+nano zookeeper.properties
+
+update dataDir to 
+dataDir=/home/ai/kafka/data/zookeeper
+
+
+nano server.properties
+update log.dirs to 
+log.dirs=/home/ai/kafka/data/server
+
+
+
+//start zookeeper server 
+bin/zookeeper-server-start.sh config/zookeeper.properties
+
+//start kafka server
+bin/kafka-server-start.sh config/server.properties
